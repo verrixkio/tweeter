@@ -23,3 +23,21 @@ body {
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
+
+/* Font Style for body */
+
+ body {
+   font-family: 'Roboto Condensed', sans-serif;
+  }
+
+
+/* Main element */
+
+  main {
+    position: absolute;
+    left: 50%;
+    margin-left: -225px;
+    margin-top: 140px;
+    width: 450px;
+    background-color: white;
+  } 

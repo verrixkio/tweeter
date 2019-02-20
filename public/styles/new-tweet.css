@@ -1,0 +1,33 @@
+.container .new-tweet {
+  border: 2px solid grey;
+  border-radius: 10px;
+  margin-left: 2em;
+  margin-right: 2em;
+  background-color: lightgray;
+  position: relative;
+}
+/* H2 section */
+
+.container #compose-tweet  {
+  border-bottom: 2px solid black;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  position: relative;
+}
+
+.container #form-tweet {
+  margin-left: .75em;
+  margin-right: .75em;
+}
+
+.container #form-tweet textarea {
+  width: 100%;
+  padding-left: .5em;
+}
+
+.container #form-tweet .counter {
+  position: relative;
+  float: right;
+}
+
+
