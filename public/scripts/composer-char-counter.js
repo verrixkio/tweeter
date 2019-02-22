@@ -15,7 +15,6 @@ $(document).ready(function() {
     //Write some logic that occurs when charCount < 0 to display when red
     if (charCount < 0) {
       $('.counter').css('color', 'red');
-      alert("You are over the character count. Please remove characters")
     } else {
       $('.counter').css('color', 'black');
     }

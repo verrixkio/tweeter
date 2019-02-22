@@ -60,3 +60,17 @@
   margin-bottom: 2em;
   margin-left: .5em;
 }
+
+.error {
+  margin-left: 2em;
+}
+
+.error .errorPrompt{
+  background: #c51244 ;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px #aaaaaa;
+  margin-top: 10px;
+  width: 50%;
+}
+

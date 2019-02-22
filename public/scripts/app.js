@@ -4,6 +4,7 @@ $(document).ready(function() {/*
   * Reminder: Use (and do all your DOM work in) jQuery's document ready function
   */
  console.log('ready for work')
+ $(".container .error .errorPrompt").hide();
 
   // Test / driver code (temporary). Eventually will get this from the server.
 
@@ -73,7 +74,7 @@ $(document).ready(function() {/*
   //Load Tweets Function Fetching form the /tweets page
 
   // It will use Jquery to make a request to /tweets and receieve the array of tweets as JSON
-  const render = function loadTweets() {
+  function loadTweets() {
     var $form = $('#form-tweet');
     $form.on('submit', function () {
       console.log('Button clicked, performing ajax call...');
@@ -85,12 +86,11 @@ $(document).ready(function() {/*
       const characterLogic = ($('.container .new-tweet form .counter').text())
       charCheck = Number(characterLogic)
       if (charCheck === 140) {
-        console.log("true")
-        alert("Please twitter tweet some tweety tweets!")
+        $(".container .error .errorPrompt").slideToggle(300);
       } else if (charCheck < 0) {
-        alert("Too many Characters")
+        $(".container .error .errorPrompt").slideToggle(300);
       } else {
-  
+        $(".container .error .errorPrompt").hide();
         $.ajax('/tweets', { method: 'GET'})
         .then(function (posttweets) {
           console.log('Success: ', posttweets);
@@ -104,7 +104,14 @@ $(document).ready(function() {/*
       }
     });
   }
-  render()
+  loadTweets()  
+  
+  // Generating Compose listen and slide event.
+    //Toggle Down the new-tweet prompt.
+  $( "#nav-bar #tweet-button").click(function(event) {
+    $(".container .new-tweet ").slideToggle(300);
+    $(".container .new-tweet form textarea").focus();
+  });
 });
 
 
