@@ -20,7 +20,7 @@ $(document).ready(function() {/*
     const profilePic = tweetInfo.user.avatars.small
     //Username
     const tweetUserName = tweetInfo.user.name
-    console.log(tweetUserName)
+    
     //Handle
     const handle = tweetInfo.user.handle
     //date
@@ -58,32 +58,14 @@ $(document).ready(function() {/*
       $('.tweet-container').prepend($tweet);
     }
   }
-
+  // Setting up the submit event caller on the form-tweet
   var $form = $('#form-tweet');
   $form.on('submit', function (event) {
     console.log('Button clicked, performing ajax call...');
     event.preventDefault()
+    //
     const serialtweet = $(this).serialize()
-    $.ajax('/tweets', { method: 'POST', data: serialtweet })
-      console.log(serialtweet)
-    //.then(function (tweetAsync) {
-      //console.log(serialtweet)
-      //$button.replaceWith(morePostsHtml);
-    });
-
-  //Load Tweets Function Fetching form the /tweets page
-
-  // It will use Jquery to make a request to /tweets and receieve the array of tweets as JSON
-  function loadTweets() {
-    var $form = $('#form-tweet');
-    $form.on('submit', function () {
-      console.log('Button clicked, performing ajax call...');
-      //Form Validation logic. 
-      // Need to check the character count.
-
-      //This wont work because we dont have the character set
-      // const charCount = 
-      const characterLogic = ($('.container .new-tweet form .counter').text())
+    const characterLogic = ($('.container .new-tweet form .counter').text())
       charCheck = Number(characterLogic)
       if (charCheck === 140) {
         $(".container .error .errorPrompt").slideToggle(300);
@@ -91,21 +73,31 @@ $(document).ready(function() {/*
         $(".container .error .errorPrompt").slideToggle(300);
       } else {
         $(".container .error .errorPrompt").hide();
-        $.ajax('/tweets', { method: 'GET'})
-        .then(function (posttweets) {
-          console.log('Success: ', posttweets);
-          renderTweets(posttweets)
+        
+        $.ajax('/tweets', { method: 'POST', data: serialtweet })
+          .then(function (data) {
+          loadTweets();
           //Reset the char count
           $('.container .new-tweet form textarea').val('')
           $('.container .new-tweet form .counter').text('140')
-          
-          
+
         });
       }
-    });
-  }
-  loadTweets()  
+  });
   
+  //Load Tweets Function Fetching form the /tweets page
+
+  // It will use Jquery to make a request to /tweets and receieve the array of tweets as JSON
+  //This function successfully returns tweets
+  function loadTweets() {
+        $.ajax('/tweets', { method: 'GET'})
+          //How do i access the information
+          .then(function (posttweets) {
+            renderTweets(posttweets);  
+          });     
+        }; 
+  loadTweets()
+
   // Generating Compose listen and slide event.
     //Toggle Down the new-tweet prompt.
   $( "#nav-bar #tweet-button").click(function(event) {
