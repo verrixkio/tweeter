@@ -7,6 +7,12 @@ $(document).ready(function() {/*
 
   // Test / driver code (temporary). Eventually will get this from the server.
 
+  function escape(str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
   function createTweetElement(tweetInfo) {
  
       //Okay we need small profile picture
@@ -23,15 +29,15 @@ $(document).ready(function() {/*
     return (`
       <article class="tweet">
               <header>
-                <img class="profile-pic" src="${profilePic}"</img>
-                <span class="profile-name">${tweetUserName}</span>
-                <span class="user-handle">${handle}</span>
+                <img class="profile-pic" src="${escape(profilePic)}"</img>
+                <span class="profile-name">${escape(tweetUserName)}</span>
+                <span class="user-handle">${escape(handle)}</span>
               </header>
               <div>
-                <span class="tweet">${tweetContent}</span>
+                <span class="tweet">${escape(tweetContent)}</span>
               </div>
               <footer>
-                <span class="date">${tweetDate}</span>
+                <span class="date">${escape(tweetDate)}</span>
               </footer>
       </article>
     
@@ -40,13 +46,15 @@ $(document).ready(function() {/*
     
   }
   function renderTweets(tweets) {
+    //Create the article
+    $('<article>').addClass('tweet');
     // loops through tweets
     for (tweet in tweets) {
       
       // calls createTweetElement for each tweet
       const $tweet = createTweetElement(tweets[tweet])
       // takes return value and appends it to the tweets container
-      $('.container').append($tweet);
+      $('.tweet-container').prepend($tweet);
     }
   }
 
@@ -87,6 +95,10 @@ $(document).ready(function() {/*
         .then(function (posttweets) {
           console.log('Success: ', posttweets);
           renderTweets(posttweets)
+          //Reset the char count
+          $('.container .new-tweet form textarea').val('')
+          $('.container .new-tweet form .counter').text('140')
+          
           
         });
       }
