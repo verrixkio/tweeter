@@ -95,7 +95,7 @@ $(document).ready(function() {/*
       $('.container').append($tweet);
     }
   }
-  renderTweets(data)
+  // renderTweets(data);
 
   var $form = $('#form-tweet');
   $form.on('submit', function (event) {
@@ -108,8 +108,23 @@ $(document).ready(function() {/*
       //console.log(serialtweet)
       //$button.replaceWith(morePostsHtml);
     });
-  });
 
+  //Load Tweets Function Fetching form the /tweets page
+
+  // It will use Jquery to make a request to /tweets and receieve the array of tweets as JSON
+  const render = function loadTweets() {
+    var $form = $('#form-tweet');
+    $form.on('submit', function () {
+      console.log('Button clicked, performing ajax call...');
+      $.ajax('/tweets', { method: 'GET'})
+      .then(function (posttweets) {
+        console.log('Success: ', posttweets);
+        renderTweets(posttweets)
+      });
+    });
+  }
+  render()
+});
 
 // });
 
