@@ -4,6 +4,7 @@ $(document).ready(function() {/*
   * Reminder: Use (and do all your DOM work in) jQuery's document ready function
   */
  console.log('ready for work')
+ $(".container .new-tweet").hide()
  $(".container .error .errorPrompt").hide();
 
   // Test / driver code (temporary). Eventually will get this from the server.
@@ -39,6 +40,9 @@ $(document).ready(function() {/*
               </div>
               <footer>
                 <span class="date">${escape(tweetDate)}</span>
+                <i class="fas fa-heart"></i>
+                <i class="fas fa-flag"></i>
+                <i class="fas fa-share"></i>
               </footer>
       </article>
     
@@ -100,7 +104,7 @@ $(document).ready(function() {/*
 
   // Generating Compose listen and slide event.
     //Toggle Down the new-tweet prompt.
-  $( "#nav-bar #tweet-button").click(function(event) {
+  $( "#nav-bar .btn").click(function(event) {
     $(".container .new-tweet ").slideToggle(300);
     $(".container .new-tweet form textarea").focus();
   });
