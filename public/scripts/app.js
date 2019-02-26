@@ -21,7 +21,14 @@ $(document).ready(function() {/*
     const profilePic = tweetInfo.user.avatars.small
     const tweetUserName = tweetInfo.user.name
     const handle = tweetInfo.user.handle
-    const tweetDate = tweetInfo.created_at
+    const tweetDatesec = tweetInfo.created_at
+    function toDateTime(secs) {
+      var t = new Date(1970, 0, 1); // Epoch
+      t.setSeconds(secs);
+      return t;
+  }
+    const tweetDate = toDateTime(tweetDatesec);
+
     const tweetContent = tweetInfo.content.text
     return (`
       <article class="tweet">
@@ -34,7 +41,7 @@ $(document).ready(function() {/*
                 <span class="tweet">${escape(tweetContent)}</span>
               </div>
               <footer>
-                <span class="date">${escape(tweetDate)}</span>
+                <span class="date">${tweetDate}</span>
                 <i class="fas fa-heart"></i>
                 <i class="fas fa-flag"></i>
                 <i class="fas fa-share"></i>
