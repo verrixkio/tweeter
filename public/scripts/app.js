@@ -64,15 +64,20 @@ $(document).ready(function() {/*
   }
   // Setting up the submit event caller on the form-tweet
   var $form = $('#form-tweet');
+  let count = 0
   $form.on('submit', function (event) {
     console.log('Button clicked, performing ajax call...');
+    count++
     event.preventDefault()
-    //
     const serialtweet = $(this).serialize()
     const characterLogic = ($('.container .new-tweet form .counter').text())
+      
       charCheck = Number(characterLogic)
-      if (charCheck === 140) {
+      if (charCheck === 140 && count === 1) {
         $(".container .error .errorPrompt").slideToggle(300);
+
+      } else if (charCheck === 140 && count > 0) {
+
       } else if (charCheck < 0) {
         $(".container .error .errorPrompt").slideToggle(300);
       } else {
@@ -86,6 +91,7 @@ $(document).ready(function() {/*
         });
           $('.container .new-tweet form textarea').val('')
           $('.container .new-tweet form .counter').text('140') 
+          count = 0
       }     
   });
   

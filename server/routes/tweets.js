@@ -23,12 +23,11 @@ module.exports = function(DataHelpers) {
   
   //Create a new tweet. Post the Tweets we recieve from the database.
   tweetsRoutes.post("/", function(req, res) {
-    console.log(req.body)
     if (!req.body.text) {
       res.status(400).json({ error: 'invalid request: no data in POST body'});
       return;
     }
-    
+
     // Generate Random user
     const user = req.body.user ? req.body.user : userHelper.generateRandomUser();
     // Create the actual tweet object.
