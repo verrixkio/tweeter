@@ -10,22 +10,18 @@
 }
 
 #nav-bar .logo {
-  /* ... */
   height: 80px;
   width: 80px;
   float: left;
-
 }
 
 #nav-bar .header {
-  /* ... */
   float: left;
   font-size: 200%;
   line-height: 2.5;
   padding-left: 10px;
-
-
 }
+
 /* Compose button */
 #nav-bar .btn{
   position: absolute;
@@ -39,11 +35,9 @@
   color: rgb(89, 145, 89);
   border-radius: 10px;
   font-size: 150%;
-
 }
 
 #nav-bar .btn:hover {
   background-color: white;
   color: black;
-
 }

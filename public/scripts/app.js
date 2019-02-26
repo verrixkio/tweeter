@@ -3,9 +3,10 @@ $(document).ready(function() {/*
   * jQuery is already loaded
   * Reminder: Use (and do all your DOM work in) jQuery's document ready function
   */
- console.log('ready for work')
  $(".container .new-tweet").hide()
  $(".container .error .errorPrompt").hide();
+ 
+ 
 
   // Test / driver code (temporary). Eventually will get this from the server.
 
@@ -17,21 +18,15 @@ $(document).ready(function() {/*
 
   function createTweetElement(tweetInfo) {
  
-      //Okay we need small profile picture
     const profilePic = tweetInfo.user.avatars.small
-    //Username
     const tweetUserName = tweetInfo.user.name
-    
-    //Handle
     const handle = tweetInfo.user.handle
-    //date
     const tweetDate = tweetInfo.created_at
-    //tweet
     const tweetContent = tweetInfo.content.text
     return (`
       <article class="tweet">
               <header>
-                <img class="profile-pic" src="${escape(profilePic)}"</img>
+                <img class="profile-pic" src="${profilePic}"</img>
                 <span class="profile-name">${escape(tweetUserName)}</span>
                 <span class="user-handle">${escape(handle)}</span>
               </header>
@@ -45,11 +40,9 @@ $(document).ready(function() {/*
                 <i class="fas fa-share"></i>
               </footer>
       </article>
-    
     `)
-
-    
   }
+  
   function renderTweets(tweets) {
     //Create the article
     $('<article>').addClass('tweet');
@@ -77,31 +70,31 @@ $(document).ready(function() {/*
         $(".container .error .errorPrompt").slideToggle(300);
       } else {
         $(".container .error .errorPrompt").hide();
-        
-        $.ajax('/tweets', { method: 'POST', data: serialtweet })
-          .then(function (data) {
-          loadTweets();
-          //Reset the char count
-          $('.container .new-tweet form textarea').val('')
-          $('.container .new-tweet form .counter').text('140')
-
+        $.ajax('/tweets', { method: 'POST', data: serialtweet, 
+          success: function(tweeter) {  
+            newtweet = createTweetElement(tweeter)
+            $('.tweet-container').prepend(newtweet);
+            // renderTweets(serialtweet)   
+          }
         });
-      }
+          $('.container .new-tweet form textarea').val('')
+          $('.container .new-tweet form .counter').text('140') 
+      }     
   });
   
   //Load Tweets Function Fetching form the /tweets page
 
   // It will use Jquery to make a request to /tweets and receieve the array of tweets as JSON
   //This function successfully returns tweets
-  function loadTweets() {
-        $.ajax('/tweets', { method: 'GET'})
+  function loadTweets(data) {
+      $.ajax('/tweets', { method: 'GET'})
           //How do i access the information
           .then(function (posttweets) {
             renderTweets(posttweets);  
-          });     
+          });
         }; 
   loadTweets()
-
+  
   // Generating Compose listen and slide event.
     //Toggle Down the new-tweet prompt.
   $( "#nav-bar .btn").click(function(event) {

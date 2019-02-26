@@ -5,17 +5,13 @@
   border-radius: 10px;
   margin-left: 2em;
   margin-right: 2em;
-  /* position: relative; */
-
 }
-/* trying to hover */
+
 .container article:hover {
   opacity: 1;
-
 }
 
 .container article header {
-
   width: 100%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -27,7 +23,6 @@
   border-radius: 10px;
   margin-left: .5em;
   margin-top: .5em;
-  
 }
 
 .container article header .profile-name {
@@ -53,13 +48,13 @@
   margin-left: 0.5em;
 }
 
-
 .container article div {
   margin-top: 2em;
   margin-bottom: 2em;
   margin-left: .5em;
   word-wrap: break-word;
 }
+
 .container article i {
   color: green;
   float: right;
@@ -67,7 +62,6 @@
   margin-bottom: .5em;
   margin-right: .5em;
   opacity: 0;
-  
 }
 
 .container article:hover i {

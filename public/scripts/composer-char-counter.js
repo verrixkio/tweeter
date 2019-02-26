@@ -18,15 +18,7 @@ $(document).ready(function() {
     } else {
       $('.counter').css('color', 'black');
     }
-    
   });
-
-  // $('#form-tweet').submit(function(event) {
-  //   console.log(event)
-  //   event.preventDefault()
-    
-  // })
-  
 });
 
 
